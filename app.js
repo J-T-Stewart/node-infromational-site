@@ -21,7 +21,13 @@ const handleNotFound = (res) => {
 
 const readFile = (req, res) => {
 
-    const fileName  = req.url === "/" ? 'index.html' : `${req.url}.html`;
+    const fileName  = 
+        req.url === "/" ?
+        'index.html' :
+        req.url.split('.').length === 1 ?
+            `${req.url}.html` :
+            req.url
+    ;
 
     const filePath  = path.join(__dirname, 'public', fileName);
 
